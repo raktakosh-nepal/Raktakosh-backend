@@ -1,7 +1,7 @@
 package com.example.raktakosh.Repository;
 
-import org.springframework.stereotype.Repository;
+import com.example.raktakosh.Models.BloodBank;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface BloodBankRepo {
+public interface BloodBankRepo extends JpaRepository<BloodBank, Integer> {
 }

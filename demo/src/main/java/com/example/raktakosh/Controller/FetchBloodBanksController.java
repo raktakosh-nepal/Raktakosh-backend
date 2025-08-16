@@ -1,26 +1,28 @@
 package com.example.raktakosh.Controller;
 
-import com.example.raktakosh.Models.BloodBankModel;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+
+import com.example.raktakosh.Models.Blood;
+import com.example.raktakosh.Models.BloodBank;
+import com.example.raktakosh.Service.FetchBloodBanksService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class FetchBloodBanksController {
-    ArrayList<BloodBankModel> data=new ArrayList<>();
+    @Autowired
+    FetchBloodBanksService fetchBloodBanksService;
 
-    @GetMapping("/getBloodBanks/{type}/{latitude}/{longitude}")
-    public ResponseEntity<ArrayList<BloodBankModel>> getBloodBanks(@PathVariable String type, @PathVariable float latitude, @PathVariable float longitude) {
-        data.add(new BloodBankModel(1.0f, 1.0f, "Prerit Rakta Seva", "xyz", 100));
-        return ResponseEntity.status(HttpStatus.OK).body(data);
 
+    @GetMapping("/getbloodbanks/{latitude}/{longitude}/{type}")
+    public List<BloodBank> getBloodBanks(@PathVariable double latitude, @PathVariable double longitude, @PathVariable String type) {
+        return fetchBloodBanksService.getBloodBanks(latitude, longitude, type);
     }
-    @GetMapping("/")
-    public String hello(){
-        return "Hello World";
+
+    @PostMapping("/addBank")
+    public BloodBank addBank(@RequestBody BloodBank bank) {
+        return fetchBloodBanksService.addBank(bank);
     }
 }
