@@ -1,16 +1,6 @@
 package com.example.raktakosh.Models;
 
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import jakarta.persistence.*;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
-
-@Entity
-public class BloodBank {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "blood_bank_id")
+public class BloodBankWithQuantity {
     private Integer bloodBankId;
     private String name;
     private double latitude;
@@ -18,17 +8,8 @@ public class BloodBank {
     private String imageUrl;
     private String address;
     private String contact;
-
-
-    public BloodBank(Integer bloodBankId, String name, double latitude, double longitude, String imageUrl, String address, String contact) {
-        this.bloodBankId = bloodBankId;
-        this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.imageUrl = imageUrl;
-        this.address = address;
-        this.contact = contact;
-    }
+    private String type;
+    private double quantity;
 
     public Integer getBloodBankId() {
         return bloodBankId;
@@ -86,9 +67,34 @@ public class BloodBank {
         this.contact = contact;
     }
 
-    public BloodBank() {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
+    public BloodBankWithQuantity(Integer bloodBankId, String name, double latitude, double longitude, String imageUrl, String address, String contact, String type, double quantity) {
+        this.bloodBankId = bloodBankId;
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.imageUrl = imageUrl;
+        this.address = address;
+        this.contact = contact;
+        this.type = type;
+        this.quantity = quantity;
+    }
+
+    public BloodBankWithQuantity() {
     }
 }
-
-
-
